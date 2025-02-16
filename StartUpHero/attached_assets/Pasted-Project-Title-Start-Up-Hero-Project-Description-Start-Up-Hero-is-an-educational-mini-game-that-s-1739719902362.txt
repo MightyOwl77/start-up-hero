@@ -1,0 +1,68 @@
+Project Title: Start Up Hero
+Project Description:
+"Start Up Hero" is an educational mini-game that simulates launching and running a startup. The game teaches basic business and finance concepts—like achieving breakeven, managing cash flow, and understanding financial statements—through interactive decision-making. The app should have an iOS-native look using SwiftUI.
+
+Key Features & Screens:
+
+Introduction/Tutorial Screen:
+Explains the game concept and objectives briefly.
+Option to skip the tutorial.
+Player Customization Screen:
+Allows the player to enter their founder name.
+Enables the player to choose a business type from three options: Lemonade Stand, Pizza Restaurant, or Tech Startup.
+Funding Decision Screen:
+Presents funding options: Bank Loan, Friends & Family, Self-Funding, and Venture Capital (for Tech Startup only).
+Each option affects the starting cash (e.g., Bank Loan adds $2000, Friends & Family adds $1000, Self-Funding adds nothing, Venture Capital adds $3000 with a note on equity loss).
+Business Simulation Screen:
+Implements core game logic to simulate business rounds.
+Each round randomly generates revenue (between $500 and $1500) and expenses (between $300 and $1000).
+Calculates net income (revenue minus expenses) and updates the player's cash accordingly.
+Displays a financial report showing revenue, expenses, profit/loss, and updated cash balance.
+Summary/Results Screen:
+Shows the final status of the business, including total cash, with feedback on performance (e.g., whether the business broke even, made a profit, or incurred a loss).
+Core Game Logic Example (to integrate):
+
+swift
+Copy
+// Initial player cash
+var playerCash: Int = 1000
+
+// Define funding options
+enum FundingOption: String {
+    case bankLoan = "Bank Loan"
+    case friendsFamily = "Friends & Family"
+    case selfFunding = "Self-Funding"
+    case ventureCapital = "Venture Capital"
+}
+
+// Function to process funding decision
+func fundStartup(with option: FundingOption) {
+    switch option {
+    case .bankLoan:
+        playerCash += 2000
+    case .friendsFamily:
+        playerCash += 1000
+    case .selfFunding:
+        break
+    case .ventureCapital:
+        playerCash += 3000
+    }
+}
+
+// Function to simulate a business round
+func simulateRound(round: Int) -> (revenue: Int, expense: Int, netIncome: Int) {
+    let revenue = Int.random(in: 500...1500)
+    let expense = Int.random(in: 300...1000)
+    let netIncome = revenue - expense
+    playerCash += netIncome
+    return (revenue, expense, netIncome)
+}
+Additional Requirements:
+
+Use Swift and SwiftUI, managing state with @State and/or @ObservedObject as needed.
+Create a modular, well-commented project with separate Swift files for each screen (e.g., IntroductionView.swift, CustomizationView.swift, FundingView.swift, SimulationView.swift, and SummaryView.swift).
+Integrate iOS-style components such as a navigation bar and tab bar to mimic a native iOS experience.
+Ensure the app flows from the introduction through player customization, funding decisions, business simulation rounds, and finally to a summary/results screen.
+Goal:
+Generate a SwiftUI project that implements these features and demonstrates a smooth, interactive game flow for "Start Up Hero." The project should be modular, well-documented, and ready for testing in Xcode.
+
